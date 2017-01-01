@@ -32,6 +32,7 @@ import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.Task;
 import com.manu.projeto.novostockhawk.R;
 import com.manu.projeto.novostockhawk.SimpleItemTouchHelperCallback;
+import com.manu.projeto.novostockhawk.StockIntentService;
 import com.manu.projeto.novostockhawk.StockTaskService;
 import com.manu.projeto.novostockhawk.Utils;
 import com.manu.projeto.novostockhawk.data.QuoteColumns;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
         // The intent service is for executing immediate pulls from the Yahoo API
         // GCMTaskService can only schedule tasks, they cannot execute immediately
-        mServiceIntent = new Intent(this, MainActivity.class);
+        mServiceIntent = new Intent(this, StockIntentService.class);
         if (savedInstanceState == null)
         {
             // Run the initialize task service so that some stocks appear upon an empty database
@@ -309,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     e.printStackTrace();
                 }
             }
-
+//aqui abre o grafico ¬¬'
             Intent intent = new Intent(MainActivity.this, null);
             intent.putStringArrayListExtra(getString(R.string.m_end_values), endValues);
             intent.putStringArrayListExtra(getString(R.string.m_dates), dates);

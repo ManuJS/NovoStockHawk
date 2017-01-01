@@ -10,14 +10,14 @@
     <string name="default_date_format" translatable="false">yyyy-MM-dd</string>
 
 
-    <string name="action_settings" translatable="false">Configuração</string>
-    <string name="action_change_units" translatable="false">Mudar unidade</string>
-    <string name="symbol_search">Procurar simbolo</string>
-    <string name="content_test">Procurar por uma ação</string>
-    <string name="input_hint">FB</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="action_change_units" translatable="false">Change Units</string>
+    <string name="symbol_search" translatable="false">Symbol Search</string>
+    <string name="content_test" translatable="false">Search for a Stock Symbol</string>
+    <string name="input_hint" translatable="false">FB</string>
     <string name="input_prefill" translatable="false"></string>
-    <string name="network_toast" >Esse aplicativo precisa de uma conexão com a internet, verifique e reinicie o aplicativo.</string>
-    <string name="no_stock_found" translatable="false">Ação %@ não encontrada!</string>
+    <string name="network_toast" translatable="false">This app requires an internet connection. Please connect and restart the app.</string>
+    <string name="no_stock_found" translatable="false">Stock %@ not found!</string>
     <string name="add_stock_content_desc" translatable="false">Add a stock</string>
     <string name="detail_graph_headline" translatable="false">Price over time (last 6 months)</string>
     <string name="widget_title" translatable="false">My Stocks</string>
