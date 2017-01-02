@@ -28,6 +28,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".chart.Chart" android:parentActivityName=".ui.MainActivity"/>
+
         <!--<provider-->
             <!--android:name=".data.generated.QuoteProvider"-->
             <!--android:authorities="com.manu.projeto.novostockhawk.data"-->

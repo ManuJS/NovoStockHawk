@@ -8,6 +8,7 @@
     android:paddingEnd="16dp"
     android:paddingStart="16dp">
 
+
     <TextView
         android:id="@+id/stock_symbol"
         style="@style/StockSymbolTextStyle"

@@ -35,6 +35,7 @@ import com.manu.projeto.novostockhawk.SimpleItemTouchHelperCallback;
 import com.manu.projeto.novostockhawk.StockIntentService;
 import com.manu.projeto.novostockhawk.StockTaskService;
 import com.manu.projeto.novostockhawk.Utils;
+import com.manu.projeto.novostockhawk.chart.Chart;
 import com.manu.projeto.novostockhawk.data.QuoteColumns;
 import com.manu.projeto.novostockhawk.data.QuoteProvider;
 import com.melnykov.fab.FloatingActionButton;
@@ -53,6 +54,8 @@ import com.google.android.gms.gcm.PeriodicTask;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
 
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private TextView mTextViewConnection;
     private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,8 +86,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         BROADCAST_NO_STOCK_FOUND = getString(R.string.broadcast_stock_not_found);
 
-        if(!mReceiverRegistered)
-        {
+        if (!mReceiverRegistered) {
             mReceiver = new NoStockFoundReceiver();
             LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter(BROADCAST_NO_STOCK_FOUND));
             mReceiverRegistered = true;
@@ -99,12 +102,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // The intent service is for executing immediate pulls from the Yahoo API
         // GCMTaskService can only schedule tasks, they cannot execute immediately
         mServiceIntent = new Intent(this, StockIntentService.class);
-        if (savedInstanceState == null)
-        {
+        if (savedInstanceState == null) {
             // Run the initialize task service so that some stocks appear upon an empty database
             mServiceIntent.putExtra(getString(R.string.m_tag), getString(R.string.m_init));
-            if (isConnected)
-            {
+            if (isConnected) {
                 startService(mServiceIntent);
             }
         }
@@ -134,17 +135,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         fab.setVisibility(isConnected ? View.VISIBLE : View.GONE);
 
         fab.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 new MaterialDialog.Builder(mContext).title(R.string.symbol_search)
                         .content(R.string.content_test)
-                        .inputType(InputType.TYPE_CLASS_TEXT)
+                        .inputType(InputType.TYPE_CLASS_TEXT | TYPE_TEXT_FLAG_CAP_CHARACTERS)//obriga o texto a ser inserido em caixa alta.
                         .input(R.string.input_hint, R.string.input_prefill, new MaterialDialog.InputCallback() {
-                            @Override public void onInput(MaterialDialog dialog, CharSequence input) {
-                                // On FAB click, receive user input. Make sure the stock doesn't already exist
-                                // in the DB and proceed accordingly
-                                Cursor c = getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
-                                        new String[] { QuoteColumns.SYMBOL }, QuoteColumns.SYMBOL + "= ?",
-                                        new String[] { input.toString() }, null);
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                // Receberá a entrada do usuarii. Verificará se já nao existe
+                                // no banco de dados
+                                Cursor c = getContentResolver().query(
+                                        QuoteProvider.Quotes.CONTENT_URI,
+                                        new String[]{QuoteColumns.SYMBOL},
+                                        QuoteColumns.SYMBOL + "= ?",
+                                        new String[]{input.toString()}, null);
+
                                 if (c.getCount() != 0) {
                                     Toast toast =
                                             Toast.makeText(MainActivity.this, getString(R.string.stock_already_saved),
@@ -152,8 +158,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                                     toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
                                     toast.show();
                                     return;
-                                } else {
-                                    // Add the stock to DB
+                                }
+
+                                else {
+                                                                        // Add the stock to DB
                                     mServiceIntent.putExtra(getString(R.string.m_tag), getString(R.string.m_add));
                                     mServiceIntent.putExtra(getString(R.string.symbol), input.toString());
                                     startService(mServiceIntent);
@@ -169,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mItemTouchHelper.attachToRecyclerView(recyclerView);
 
         mTitle = getTitle();
-        if (isConnected){
+        if (isConnected) {
             long period = 3600L;
             long flex = 10L;
             String periodicTag = getString(R.string.m_periodic);
@@ -194,8 +202,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onPause() {
         super.onPause();
 
-        if(mReceiverRegistered)
-        {
+        if (mReceiverRegistered) {
             LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
             mReceiverRegistered = false;
         }
@@ -207,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         getLoaderManager().restartLoader(CURSOR_LOADER_ID, null, this);
     }
 
-    public void networkToast(){
+    public void networkToast() {
         Toast.makeText(mContext, getString(R.string.network_toast), Toast.LENGTH_SHORT).show();
     }
 
@@ -220,37 +227,37 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_stocks, menu);
+        getMenuInflater().inflate(R.menu.menu_acoes, menu);
         restoreActionBar();
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
 //            return true;
 //        }
-//
-//        if (id == R.id.action_change_units){
-//            // this is for changing stock changes from percent value to dollar value
-//            Utils.showPercent = !Utils.showPercent;
-//            this.getContentResolver().notifyChange(QuoteProvider.Quotes.CONTENT_URI, null);
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+
+        if (id == R.id.action_change_units) {
+            // this is for changing stock changes from percent value to dollar value
+            Utils.showPorcentagem = !Utils.showPorcentagem;
+            this.getContentResolver().notifyChange(QuoteProvider.Quotes.CONTENT_URI, null);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args){
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // This narrows the return to only the stocks that are most current.
         return new CursorLoader(this, QuoteProvider.Quotes.CONTENT_URI,
-                new String[]{ QuoteColumns._ID, QuoteColumns.SYMBOL, QuoteColumns.BIDPRICE,
+                new String[]{QuoteColumns._ID, QuoteColumns.SYMBOL, QuoteColumns.BIDPRICE,
                         QuoteColumns.PERCENT_CHANGE, QuoteColumns.CHANGE, QuoteColumns.ISUP},
                 QuoteColumns.ISCURRENT + " = ?",
                 new String[]{"1"},
@@ -258,13 +265,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data){
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mCursorAdapter.swapCursor(data);
         mCursor = data;
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader){
+    public void onLoaderReset(Loader<Cursor> loader) {
         mCursorAdapter.swapCursor(null);
     }
 
@@ -273,7 +280,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            String stockName = intent.hasExtra(getString(R.string.m_name)) ? "\"" + intent.getStringExtra(getString(R.string.m_name)) + "\"" : getString(R.string.with_this_name);
+            String stockName = intent.hasExtra(getString(R.string.m_name)) ? "\""
+                    + intent.getStringExtra(getString(R.string.m_name)) + "\"" : getString(R.string.with_this_name);
             Toast.makeText(MainActivity.this, getString(R.string.no_stock_found).replace(getString(R.string.m_string_placeholder), stockName), Toast.LENGTH_LONG).show();
         }
     }
@@ -284,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         private String mStringResponse;
         ArrayList<JSONObject> mContentVals;
 
-        public HistoricalDataAsyncTask(String symbol){
+        public HistoricalDataAsyncTask(String symbol) {
             mSymbol = symbol;
         }
 
@@ -292,26 +300,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         protected void onPostExecute(ArrayList<JSONObject> contentVals) {
             super.onPostExecute(contentVals);
 
-            if(mProgressDialog != null && mProgressDialog.isShowing())
+            if (mProgressDialog != null && mProgressDialog.isShowing())
                 mProgressDialog.dismiss();
 
             ArrayList<String> endValues = new ArrayList<>();
             ArrayList<String> dates = new ArrayList<>();
 
-            for(JSONObject jsonObject : mContentVals)
-            {
-                try
-                {
+            for (JSONObject jsonObject : mContentVals) {
+                try {
                     endValues.add(jsonObject.getString(getString(R.string.m_close)));
                     dates.add(jsonObject.getString(getString(R.string.m_date)));
-                }
-                catch (JSONException e)
-                {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
 //aqui abre o grafico ¬¬'
-            Intent intent = new Intent(MainActivity.this, null);
+            Intent intent = new Intent(MainActivity.this, Chart.class);
             intent.putStringArrayListExtra(getString(R.string.m_end_values), endValues);
             intent.putStringArrayListExtra(getString(R.string.m_dates), dates);
             startActivity(intent);
@@ -338,14 +342,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             Response response;
 
-            try
-            {
+            try {
                 response = client.newCall(request).execute();
                 mStringResponse = response.body().string();
                 mContentVals = Utils.quoteJsonToContentVals(MainActivity.this, mStringResponse, true);
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
