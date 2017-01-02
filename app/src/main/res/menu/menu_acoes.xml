@@ -6,7 +6,8 @@
     <item android:id="@+id/action_change_units"
         android:title="@string/action_change_units"
         android:orderInCategory="99"
-        app:showAsAction="never"/>
+        android:contentDescription="@string/action_change_units"
+        app:showAsAction="always"/>
     <!--<item android:id="@+id/action_settings"-->
         <!--android:title="@string/action_settings"-->
         <!--android:orderInCategory="100"-->
