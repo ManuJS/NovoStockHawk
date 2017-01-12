@@ -99,8 +99,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         setContentView(R.layout.activity_main);
-        // The intent service is for executing immediate pulls from the Yahoo API
-        // GCMTaskService can only schedule tasks, they cannot execute immediately
+
         mServiceIntent = new Intent(this, StockIntentService.class);
         if (savedInstanceState == null) {
             mServiceIntent.putExtra(getString(R.string.m_tag), getString(R.string.m_init));

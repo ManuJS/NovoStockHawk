@@ -30,7 +30,6 @@ public class WidgetProvider extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 
-            // Set up the collection
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                 setRemoteAdapter(context, views);
             } else {
@@ -48,7 +47,7 @@ public class WidgetProvider extends AppWidgetProvider {
             views.setPendingIntentTemplate(R.id.widget_list, clickPendingIntentTemplate);
             views.setEmptyView(R.id.widget_list, R.id.widget_empty);
 
-            // Tell the AppWidgetManager to perform an update on the current app widget
+
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }

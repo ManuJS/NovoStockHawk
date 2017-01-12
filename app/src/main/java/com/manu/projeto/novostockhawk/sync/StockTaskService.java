@@ -128,7 +128,7 @@ public class StockTaskService extends GcmTaskService {
                     mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
                             Utils.quoteJsonToContentVals(mContext, getResponse, false));
                 } catch (RemoteException | OperationApplicationException e) {
-                    Log.e(LOG_TAG, "Error applying batch insert", e);
+                    Log.e(LOG_TAG, "erro de aplicacao", e);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
