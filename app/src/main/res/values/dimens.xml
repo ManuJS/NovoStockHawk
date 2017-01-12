@@ -11,4 +11,5 @@
     <dimen name="widget_default_height">110dp</dimen>
     <dimen name="widget_default_width">180dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="default_margin_card">5dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.manu.projeto.novostockhawk;
+package com.manu.projeto.novostockhawk.ui;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -52,10 +52,10 @@ public abstract class CursorRecyclerViewAdapter <VH extends RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(VH viewHolder, int position) {
         if (!dataIsValid){
-            throw new IllegalStateException("This should only be called when Cursor is valid");
+            throw new IllegalStateException("talvez quando o cursor a posicao do cursor for valida");
         }
         if (!mCursor.moveToPosition(position)){
-            throw new IllegalStateException("Could not move Cursor to position: " + position);
+            throw new IllegalStateException("nao é possivel mover o cursor para a o: " + position);
         }
 
         onBindViewHolder(viewHolder, mCursor);

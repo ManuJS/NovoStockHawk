@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name" translatable="false">Carteira de Ações</string>
 
+    <string name="title_layout_chart" translatable="false">Gráfico histórico de ações</string>
 
     <string name="url_yahoo_finance_1" translatable="false">https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20</string>
     <string name="url_yahoo_finance_2" translatable="false">%20and%20startDate%20%3D%20</string>
     <string name="url_yahoo_finance_3" translatable="false">%20and%20endDate%20%3D%20</string>
     <string name="url_yahoo_finance_4" translatable="false">&amp;format=json&amp;diagnostics=true&amp;env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&amp;callback=</string>
-    <!--a data será mantida no padrao americano caso o usuario troque de idioma, o historico de ação sera mantido com mais facilidades-->
+    <!--a data será mantida no padrao americano caso o usuario troque de idioma, o historico de ação sera mantido com mais facilidade-->
     <string name="default_date_format" translatable="false">yyyy-MM-dd</string>
 
 
@@ -18,7 +19,7 @@
     <string name="input_prefill" translatable="false"></string>
     <string name="network_toast" >Esse aplicativo precisa de uma conexão com a internet, verifique e reinicie o aplicativo.</string>
     <string name="no_stock_found" translatable="false">Ação %@ não encontrada!</string>
-    <string name="add_stock_content_desc" translatable="false">Add uma ação</string>
+    <string name="add_stock_content_desc" translatable="false">Adicionar uma ação</string>
     <string name="detail_graph_headline" translatable="false">Preço ao longo do tempo (ultimos 6 meses)</string>
     <string name="widget_title" translatable="false">Minhas ações</string>
     <string name="symbol" translatable="false">symbol</string>
@@ -38,4 +39,5 @@
     <string name="please_wait" translatable="false">Aguarde</string>
     <string name="loading_data" translatable="false">Carregando...</string>
     <string name="appwidget_text">exemplo7</string>
+    <string name="empty_list">Não há ações na lista</string>
 </resources>

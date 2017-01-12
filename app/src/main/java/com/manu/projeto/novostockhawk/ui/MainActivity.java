@@ -31,9 +31,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.Task;
 import com.manu.projeto.novostockhawk.R;
-import com.manu.projeto.novostockhawk.SimpleItemTouchHelperCallback;
-import com.manu.projeto.novostockhawk.StockIntentService;
-import com.manu.projeto.novostockhawk.StockTaskService;
+import com.manu.projeto.novostockhawk.sync.QuoteCursorAdapter;
+import com.manu.projeto.novostockhawk.sync.StockIntentService;
+import com.manu.projeto.novostockhawk.sync.StockTaskService;
 import com.manu.projeto.novostockhawk.Utils;
 import com.manu.projeto.novostockhawk.chart.Chart;
 import com.manu.projeto.novostockhawk.data.QuoteColumns;
@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // GCMTaskService can only schedule tasks, they cannot execute immediately
         mServiceIntent = new Intent(this, StockIntentService.class);
         if (savedInstanceState == null) {
-            // Run the initialize task service so that some stocks appear upon an empty database
             mServiceIntent.putExtra(getString(R.string.m_tag), getString(R.string.m_init));
             if (isConnected) {
                 startService(mServiceIntent);
@@ -161,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                                 }
 
                                 else {
-                                                                        // Add the stock to DB
+                                                                        // adiciona a ação ao banco
                                     mServiceIntent.putExtra(getString(R.string.m_tag), getString(R.string.m_add));
                                     mServiceIntent.putExtra(getString(R.string.symbol), input.toString());
                                     startService(mServiceIntent);
@@ -182,8 +181,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             long flex = 10L;
             String periodicTag = getString(R.string.m_periodic);
 
-            // create a periodic task to pull stocks once every hour after the app has been opened. This
-            // is so Widget data stays up to date.
+            // criar uma tarefa periodica que procuram ações toda vez que o app é aberto.
             PeriodicTask periodicTask = new PeriodicTask.Builder()
                     .setService(StockTaskService.class)
                     .setPeriod(period)
@@ -192,8 +190,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     .setRequiredNetwork(Task.NETWORK_STATE_CONNECTED)
                     .setRequiresCharging(false)
                     .build();
-            // Schedule task with tag "periodic." This ensure that only the stocks present in the DB
-            // are updated.
+
             GcmNetworkManager.getInstance(this).schedule(periodicTask);
         }
     }
@@ -234,18 +231,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
 
         if (id == R.id.action_change_units) {
-            // this is for changing stock changes from percent value to dollar value
             Utils.showPorcentagem = !Utils.showPorcentagem;
             this.getContentResolver().notifyChange(QuoteProvider.Quotes.CONTENT_URI, null);
         }
@@ -255,7 +245,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        // This narrows the return to only the stocks that are most current.
         return new CursorLoader(this, QuoteProvider.Quotes.CONTENT_URI,
                 new String[]{QuoteColumns._ID, QuoteColumns.SYMBOL, QuoteColumns.BIDPRICE,
                         QuoteColumns.PERCENT_CHANGE, QuoteColumns.CHANGE, QuoteColumns.ISUP},

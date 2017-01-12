@@ -28,49 +28,48 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".chart.Chart" android:parentActivityName=".ui.MainActivity"/>
-
-        <!--<provider-->
-            <!--android:name=".data.generated.QuoteProvider"-->
-            <!--android:authorities="com.manu.projeto.novostockhawk.data"-->
-            <!--android:exported="false"-->
-            <!--android:syncable="true" />-->
-
-        <provider
-            android:name=".data.generated.QuoteProvider"
-            android:authorities="com.manu.projeto.novostockhawk.data.QuoteProvider"
-            android:exported="false" />
-
-        <receiver android:name=".widget.Cotacoes">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/cotacoes_info" />
-        </receiver>
-
-        <service android:name="com.manu.projeto.novostockhawk.StockTaskService"
+        <service android:name="com.manu.projeto.novostockhawk.sync.StockTaskService"
             android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY"/>
             </intent-filter>
         </service>
+        <service android:name="com.manu.projeto.novostockhawk.sync.StockIntentService" />
 
-        <service android:name="com.manu.projeto.novostockhawk.StockIntentService" />
+
+        <activity android:name=".chart.Chart"
+            android:label="@string/title_layout_chart"
+            android:parentActivityName=".ui.MainActivity"/>
 
 
-        <activity android:name=".widget.CotacoesConfigureActivity">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
+        <provider
+            android:name=".data.generated.QuoteProvider"
+            android:authorities="com.manu.projeto.novostockhawk.data.QuoteProvider"
+            android:exported="false" />
 
         <service
-            android:name=".service.StockWidgetService"
+            android:name=".widget.WidgetRemoteViewsService"
+            android:enabled="true"
+            android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <receiver
+            android:name=".widget.WidgetProvider"
+            android:label="@string/widget_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.manu.projeto.novostockhawk.app.ACTION_DATA_UPDATED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+
+
+
+
     </application>
 
 </manifest>

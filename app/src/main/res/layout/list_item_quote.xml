@@ -3,42 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="72dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingEnd="16dp"
     android:paddingStart="16dp">
 
-
-    <TextView
-        android:id="@+id/stock_symbol"
-        style="@style/StockSymbolTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="start|center_vertical"
-        tools:text="GOOG" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="end">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="1dp"
+        android:layout_marginEnd="@dimen/default_margin_card"
+        android:layout_marginTop="@dimen/default_margin_card">
 
         <TextView
-            android:id="@+id/bid_price"
-            style="@style/BidPriceTextStyle"
+            android:id="@+id/stock_symbol"
+            style="@style/StockSymbolTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="10sp"
-            tools:text="1000.00" />
+            android:layout_height="match_parent"
+            android:gravity="start|center_vertical"
+            tools:text="GOOG"
+            android:layout_marginLeft="@dimen/default_margin_card" />
 
-        <TextView
-            android:id="@+id/change"
-            style="@style/PercentChangeTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/percent_change_pill"
-            android:paddingEnd="3dp"
-            android:paddingStart="3dp"
-            tools:text="100%" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:paddingRight="@dimen/default_margin_card">
+
+            <TextView
+                android:id="@+id/bid_price"
+                style="@style/BidPriceTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="10sp"
+                tools:text="1000.00"
+                tools:ignore="RtlSymmetry"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/change"
+                style="@style/PercentChangeTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/percent_change_pill"
+                android:paddingEnd="3dp"
+                android:paddingStart="3dp"
+                tools:text="100%" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
 </LinearLayout>

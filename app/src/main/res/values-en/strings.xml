@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Stock Hawk</string>
 
-
+    <string name="title_layout_chart" translatable="false">Stocks history chart</string>
     <string name="url_yahoo_finance_1" translatable="false">https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20</string>
     <string name="url_yahoo_finance_2" translatable="false">%20and%20startDate%20%3D%20</string>
     <string name="url_yahoo_finance_3" translatable="false">%20and%20endDate%20%3D%20</string>

@@ -1,4 +1,4 @@
-package com.manu.projeto.novostockhawk;
+package com.manu.projeto.novostockhawk.ui;
 
 /**
  * Created by emanu on 01/01/2017.
