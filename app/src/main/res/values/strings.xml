@@ -20,7 +20,7 @@
     <string name="network_toast" >Esse aplicativo precisa de uma conexão com a internet, verifique e reinicie o aplicativo.</string>
     <string name="no_stock_found" >Ação %@ não encontrada!</string>
     <string name="add_stock_content_desc" >Adicionar uma ação</string>
-    <string name="detail_graph_headline" >Preço ao longo do tempo (ultimos 6 meses)</string>
+    <string name="detail_graph_headline" >Preço ao longo do tempo (últimos 6 meses)</string>
     <string name="widget_title" >Minhas ações</string>
     <string name="symbol" >symbol</string>
     <string name="broadcast_stock_not_found" >com.manu.projeto.novostockhawk.no_stock_found</string>
