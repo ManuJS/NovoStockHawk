@@ -1,6 +1,5 @@
 package com.manu.projeto.novostockhawk.chart;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -33,7 +32,7 @@ public class Chart extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        setContentView(R.layout.grafico);
+        setContentView(R.layout.chart_layout);
 
         mChart = (LineChartView) findViewById(R.id.linechart);
         mDetailTextView = (TextView) findViewById(R.id.tv_detail);

@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name" translatable="false">Carteira de Ações</string>
+    <string name="app_name" >Carteira de Ações</string>
 
-    <string name="title_layout_chart" translatable="false">Gráfico histórico de ações</string>
+    <string name="title_layout_chart" >Gráfico histórico de ações</string>
 
+    <!--strings necessarias para realizar a busca na base de dados, não podem ser traduzidas-->
     <string name="url_yahoo_finance_1" translatable="false">https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20</string>
     <string name="url_yahoo_finance_2" translatable="false">%20and%20startDate%20%3D%20</string>
     <string name="url_yahoo_finance_3" translatable="false">%20and%20endDate%20%3D%20</string>
@@ -11,33 +12,32 @@
     <string name="default_date_format" translatable="false">yyyy-MM-dd</string>
 
 
-    <string name="action_settings" translatable="false">Configuração</string>
-    <string name="action_change_units" translatable="false">Mudar unidade</string>
+    <string name="action_settings" >Configuração</string>
+    <string name="action_change_units" >Mudar unidade</string>
     <string name="symbol_search">Procurar simbolo</string>
     <string name="content_test">Procurar por uma ação</string>
     <string name="input_hint">FB</string>
-    <string name="input_prefill" translatable="false"></string>
     <string name="network_toast" >Esse aplicativo precisa de uma conexão com a internet, verifique e reinicie o aplicativo.</string>
-    <string name="no_stock_found" translatable="false">Ação %@ não encontrada!</string>
-    <string name="add_stock_content_desc" translatable="false">Adicionar uma ação</string>
-    <string name="detail_graph_headline" translatable="false">Preço ao longo do tempo (ultimos 6 meses)</string>
-    <string name="widget_title" translatable="false">Minhas ações</string>
-    <string name="symbol" translatable="false">symbol</string>
-    <string name="broadcast_stock_not_found" translatable="false">com.manu.projeto.novostockhawk.no_stock_found</string>
-    <string name="m_tag" translatable="false">tag</string>
-    <string name="m_init" translatable="false">init</string>
-    <string name="m_add" translatable="false">add</string>
-    <string name="m_periodic" translatable="false">periodic</string>
-    <string name="m_dates" translatable="false">dates</string>
-    <string name="m_end_values" translatable="false">endValues</string>
-    <string name="m_close" translatable="false">Close</string>
-    <string name="m_date" translatable="false">Date</string>
-    <string name="m_name" translatable="false">name</string>
-    <string name="m_string_placeholder" translatable="false">%@</string>
-    <string name="with_this_name" translatable="false">with this name</string>
-    <string name="stock_already_saved" translatable="false">Essa ação já foi salva!</string>
-    <string name="please_wait" translatable="false">Aguarde</string>
-    <string name="loading_data" translatable="false">Carregando...</string>
+    <string name="no_stock_found" >Ação %@ não encontrada!</string>
+    <string name="add_stock_content_desc" >Adicionar uma ação</string>
+    <string name="detail_graph_headline" >Preço ao longo do tempo (ultimos 6 meses)</string>
+    <string name="widget_title" >Minhas ações</string>
+    <string name="symbol" >symbol</string>
+    <string name="broadcast_stock_not_found" >com.manu.projeto.novostockhawk.no_stock_found</string>
+    <string name="m_tag" >tag</string>
+    <string name="m_init" >init</string>
+    <string name="m_add" >add</string>
+    <string name="m_periodic" >periodic</string>
+    <string name="m_dates" >dates</string>
+    <string name="m_end_values" >endValues</string>
+    <string name="m_close" >Close</string>
+    <string name="m_date" >Date</string>
+    <string name="m_name" >name</string>
+    <string name="m_string_placeholder" >%@</string>
+    <string name="with_this_name" >with this name</string>
+    <string name="stock_already_saved" >Essa ação já foi salva!</string>
+    <string name="please_wait" >Aguarde</string>
+    <string name="loading_data" >Carregando...</string>
     <string name="appwidget_text">exemplo7</string>
     <string name="empty_list">Não há ações na lista</string>
 </resources>

@@ -132,16 +132,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         fab.setVisibility(isConnected ? View.VISIBLE : View.GONE);
 
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(mContext).title(R.string.symbol_search)
                         .content(R.string.content_test)
                         .inputType(InputType.TYPE_CLASS_TEXT | TYPE_TEXT_FLAG_CAP_CHARACTERS)//obriga o texto a ser inserido em caixa alta.
-                        .input(R.string.input_hint, R.string.input_prefill, new MaterialDialog.InputCallback() {
+                        .input(R.string.input_hint, 0, new MaterialDialog.InputCallback() {
+
                             @Override
                             public void onInput(MaterialDialog dialog, CharSequence input) {
-                                // Receberá a entrada do usuarii. Verificará se já nao existe
+                                // Receberá a entrada do usuario. Verificará se já nao existe
                                 // no banco de dados
                                 Cursor c = getContentResolver().query(
                                         QuoteProvider.Quotes.CONTENT_URI,
@@ -210,9 +212,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         getLoaderManager().restartLoader(CURSOR_LOADER_ID, null, this);
     }
 
-    public void networkToast() {
-        Toast.makeText(mContext, getString(R.string.network_toast), Toast.LENGTH_SHORT).show();
-    }
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -302,7 +301,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     e.printStackTrace();
                 }
             }
-//aqui abre o grafico ¬¬'
+//aqui abre o chart_layout ¬¬'
             Intent intent = new Intent(MainActivity.this, Chart.class);
             intent.putStringArrayListExtra(getString(R.string.m_end_values), endValues);
             intent.putStringArrayListExtra(getString(R.string.m_dates), dates);

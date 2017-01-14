@@ -25,7 +25,7 @@ import com.manu.projeto.novostockhawk.ui.ItemTouchHelperViewHolder;
 public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAdapter.ViewHolder>
         implements ItemTouchHelperAdapter {
 
-    private static Context mContext;
+    private Context mContext;
     public QuoteCursorAdapter(Context context, Cursor cursor){
         super(context, cursor);
         mContext = context;
