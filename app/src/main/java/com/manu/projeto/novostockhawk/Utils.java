@@ -40,7 +40,6 @@ public class Utils {
                     jsonObject = jsonObject.getJSONObject("results")
                             .getJSONObject("quote");
 
-                    //to prevent crash, if the stock couldn't be found
                     if(jsonObject.getString("Bid").equals("null"))
                     {
                         try

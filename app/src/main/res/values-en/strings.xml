@@ -35,4 +35,7 @@
     <string name="please_wait" >Please wait</string>
     <string name="loading_data" >Loading Data...</string>
     <string name="appwidget_text">exemplo7</string>
+
+    <string name="greater_value">Greater value: </string>
+    <string name="lower_value">Lower value: </string>
 </resources>

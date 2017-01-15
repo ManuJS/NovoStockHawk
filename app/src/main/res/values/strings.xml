@@ -40,4 +40,6 @@
     <string name="loading_data" >Carregando...</string>
     <string name="appwidget_text">exemplo7</string>
     <string name="empty_list">Não há ações na lista</string>
+    <string name="greater_value">Maior valor: </string>
+    <string name="lower_value">Menor valor: </string>
 </resources>

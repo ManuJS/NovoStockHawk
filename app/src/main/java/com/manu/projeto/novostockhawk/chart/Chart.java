@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class Chart extends AppCompatActivity {
 
     private LineChartView mChart;
-    private BarChartView barChartView;
     private TextView mDetailTextView;
 
     @Override
@@ -98,7 +97,7 @@ public class Chart extends AppCompatActivity {
 
         mChart.show();
 
-        mDetailTextView.setText("Maior valor: " + maxValue + "\n" + "Menor valor: " + minValue);
+        mDetailTextView.setText(R.string.greater_value + maxValue + "\n" + R.string.lower_value + minValue);
     }
 }
 
