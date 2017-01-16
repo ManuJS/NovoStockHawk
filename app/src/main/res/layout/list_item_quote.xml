@@ -39,7 +39,6 @@
                 android:layout_height="match_parent"
                 android:paddingEnd="10sp"
                 tools:text="1000.00"
-                tools:ignore="RtlSymmetry"
                 android:gravity="center_vertical" />
 
             <TextView

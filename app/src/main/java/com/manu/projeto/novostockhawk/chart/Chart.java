@@ -97,7 +97,8 @@ public class Chart extends AppCompatActivity {
 
         mChart.show();
 
-        mDetailTextView.setText(R.string.greater_value + maxValue + "\n" + R.string.lower_value + minValue);
+        mDetailTextView.setText(getString(R.string.greater_value) +" " + maxValue + "\n" + getString(R.string.lower_value)
+                + " " +  minValue);
     }
 }
 
